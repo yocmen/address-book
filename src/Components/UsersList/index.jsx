@@ -1,6 +1,6 @@
 import React from 'react';
 import useUsers from '../../Hooks/useUsers';
-import Loading from '../Loading';
+import LoadingMessage from '../LoadingMessage';
 import ErrorMessage from '../ErrorMessage';
 import NoResultsMessage from '../NoResultsMessage';
 import List from './List';
@@ -8,7 +8,7 @@ import List from './List';
 const UsersList = () => {
   const { status, users } = useUsers();
 
-  if (status.loading) return <Loading />;
+  if (status.loading) return <LoadingMessage />;
 
   if (status.complete && status.error) return <ErrorMessage />;
 

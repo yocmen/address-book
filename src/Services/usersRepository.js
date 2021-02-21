@@ -2,7 +2,7 @@ const usersRepository = {
   fetchUsers: async () => {
     try {
       const response = await fetch(
-        `https://randomuser.me/api/?results=50&inc=picture,name,email,login,location,phone,cell`
+        `${process.env.REACT_APP_USERS_API}/?results=50&inc=picture,name,email,login,location,phone,cell`
       );
 
       if (response.ok) {

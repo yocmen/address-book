@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingMessage from '../Components/LoadingMessage';
+import LoadingMessage from '../../Components/LoadingMessage';
 
 export default {
   title: 'Messages/Loading',

@@ -1,9 +1,10 @@
 import { Factory } from 'fishery';
-import { name, internet, random, address, phone } from 'faker';
+import { name, image, internet, random, address, phone } from 'faker';
 
 const factory = Factory.define(() => ({
   picture: {
-    thumbnail: internet.avatar(),
+    thumbnail: image.avatar(),
+    // thumbnail: 'https://randomuser.me/api/portraits/thumb/men/41.jpg',
   },
   name: {
     first: name.firstName(),

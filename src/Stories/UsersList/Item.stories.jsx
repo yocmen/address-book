@@ -1,15 +1,15 @@
 import React from 'react';
 import generateUsers from '../../Tests/Factories/Users';
-import UserListItem from '../../Components/UsersListItem';
+import Item from '../../Components/UsersList/Item';
 
 const [user] = generateUsers(1, 1);
 
 export default {
   title: 'UserList/Item',
-  component: UserListItem,
+  component: Item,
 };
 
-const Template = (args) => <UserListItem user={args.user} />;
+const Template = (args) => <Item user={args.user} />;
 
 export const Default = Template.bind({});
 

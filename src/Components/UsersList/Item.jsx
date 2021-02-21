@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UsersListItem = ({ user }) => {
+const Item = ({ user }) => {
   return (
     <div className="border border-gray-200 shadow-sm rounded px-4 py-2 flex items-center space-x-2 w-full">
       <img
@@ -25,7 +25,7 @@ const UsersListItem = ({ user }) => {
   );
 };
 
-UsersListItem.propTypes = {
+Item.propTypes = {
   user: PropTypes.shape({
     login: PropTypes.shape({
       username: PropTypes.string.isRequired,
@@ -41,4 +41,4 @@ UsersListItem.propTypes = {
   }).isRequired,
 };
 
-export default UsersListItem;
+export default Item;

@@ -1,5 +1,5 @@
-import { Factory } from "fishery";
-import { name, internet, random, address, phone } from "faker";
+import { Factory } from 'fishery';
+import { name, internet, random, address, phone } from 'faker';
 
 const factory = Factory.define(() => ({
   picture: {
@@ -26,7 +26,7 @@ const factory = Factory.define(() => ({
   },
 }));
 
-export function generateUsers(min = 0, max = 10) {
+export default function generateUsers(min = 0, max = 10) {
   const length = Math.floor(Math.random() * (max - min) + min);
   return factory.buildList(length);
 }

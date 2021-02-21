@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import usersRepository from "../Services/usersRepository";
+import { useState, useEffect, useRef, useCallback } from 'react';
+import usersRepository from '../Services/usersRepository';
 
 const useUsers = () => {
   const isMounted = useRef(false);
@@ -15,10 +15,10 @@ const useUsers = () => {
   const [users, setUsers] = useState([]);
 
   const getUsers = useCallback(async () => {
-    const users = await usersRepository.fetchUsers();
+    const usersData = await usersRepository.fetchUsers();
 
-    if (users.error) {
-      //send error to monitoring tool like bugsnag
+    if (usersData.error) {
+      // send error to monitoring tool like bugsnag
       setStatus((s) => {
         return {
           ...s,
@@ -28,7 +28,7 @@ const useUsers = () => {
     }
 
     if (isMounted.current) {
-      setUsers(users);
+      setUsers(usersData);
       setStatus((s) => {
         return {
           ...s,

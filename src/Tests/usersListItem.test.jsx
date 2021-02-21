@@ -1,18 +1,19 @@
-import { render, screen } from "@testing-library/react";
-import UsersListItem from "../Components/usersListItem";
-import { generateUsers } from "./Factories/users";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import UsersListItem from '../Components/UsersListItem';
+import generateUsers from './Factories/Users';
 
-describe("User list item", () => {
-  it("shows the avatar", () => {
+describe('User list item', () => {
+  it('shows the avatar', () => {
     const users = generateUsers(1, 1);
     render(<UsersListItem user={users[0]} />);
 
     expect(
-      screen.getByRole("img", { name: `${users[0].login.username}_avatar` })
+      screen.getByRole('img', { name: `${users[0].login.username}_avatar` })
     ).toBeInTheDocument();
   });
 
-  it("shows the first name", () => {
+  it('shows the first name', () => {
     const [user] = generateUsers(1, 1);
 
     render(<UsersListItem user={user} />);
@@ -20,7 +21,7 @@ describe("User list item", () => {
     expect(screen.getByText(user.name.first)).toBeInTheDocument();
   });
 
-  it("shows the last name", () => {
+  it('shows the last name', () => {
     const [user] = generateUsers(1, 1);
 
     render(<UsersListItem user={user} />);
@@ -28,7 +29,7 @@ describe("User list item", () => {
     expect(screen.getByText(user.name.last)).toBeInTheDocument();
   });
 
-  it("shows the username", () => {
+  it('shows the username', () => {
     const [user] = generateUsers(1, 1);
 
     render(<UsersListItem user={user} />);
@@ -36,7 +37,7 @@ describe("User list item", () => {
     expect(screen.getByText(user.login.username)).toBeInTheDocument();
   });
 
-  it("shows the email", () => {
+  it('shows the email', () => {
     const [user] = generateUsers(1, 1);
 
     render(<UsersListItem user={user} />);

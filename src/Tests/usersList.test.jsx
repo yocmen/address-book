@@ -1,26 +1,27 @@
+import React from 'react';
 import {
   render,
   screen,
   waitForElementToBeRemoved,
   waitFor,
-} from "@testing-library/react";
-import UserList from "../Components/usersList";
-import usersRepository from "../Services/usersRepository";
-import { generateUsers } from "./Factories/users";
+} from '@testing-library/react';
+import UserList from '../Components/UsersList';
+import usersRepository from '../Services/usersRepository';
+import generateUsers from './Factories/Users';
 
-jest.mock("../Services/usersRepository");
+jest.mock('../Services/usersRepository');
 
-describe("userList component", () => {
-  it("shows a loading message before fetch", async () => {
+describe('userList component', () => {
+  it('shows a loading message before fetch', async () => {
     usersRepository.fetchUsers.mockResolvedValueOnce([]);
     render(<UserList />);
 
     expect(screen.getByText(/loading users/i)).toBeInTheDocument();
 
-    await waitFor(() => screen.getByRole("alert"));
+    await waitFor(() => screen.getByRole('alert'));
   });
 
-  it("hides loading message after fetch", async () => {
+  it('hides loading message after fetch', async () => {
     usersRepository.fetchUsers.mockResolvedValueOnce([]);
     render(<UserList />);
 
@@ -29,13 +30,13 @@ describe("userList component", () => {
     expect(screen.queryByText(/loading users/i)).not.toBeInTheDocument();
   });
 
-  it("shows an error message if the fetch to the API fails", async () => {
+  it('shows an error message if the fetch to the API fails', async () => {
     usersRepository.fetchUsers.mockResolvedValueOnce({ error: 500 });
     render(<UserList />);
 
-    await waitFor(() => screen.getByRole("alert"));
+    await waitFor(() => screen.getByRole('alert'));
 
-    expect(screen.getByRole("alert")).toHaveTextContent(
+    expect(screen.getByRole('alert')).toHaveTextContent(
       /Oops, error fetching the users/i
     );
   });
@@ -44,12 +45,12 @@ describe("userList component", () => {
     usersRepository.fetchUsers.mockResolvedValueOnce([]);
     render(<UserList />);
 
-    await waitFor(() => screen.getByRole("alert"));
+    await waitFor(() => screen.getByRole('alert'));
 
-    expect(screen.getByRole("alert")).toHaveTextContent(/No users yet/i);
+    expect(screen.getByRole('alert')).toHaveTextContent(/No users yet/i);
   });
 
-  it("shows a list of users", async () => {
+  it('shows a list of users', async () => {
     const users = generateUsers(1, 3);
     usersRepository.fetchUsers.mockResolvedValueOnce(users);
     render(<UserList />);

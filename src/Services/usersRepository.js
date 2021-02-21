@@ -8,9 +8,9 @@ const usersRepository = {
       if (response.ok) {
         const { results } = await response.json();
         return results;
-      } else {
-        return { error: response.status };
       }
+
+      return { error: response.status };
     } catch (error) {
       return { error: error.message };
     }

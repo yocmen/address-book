@@ -2,7 +2,7 @@ import React from 'react';
 import NoResultsMessage from '../Components/NoResultsMessage';
 
 export default {
-  title: 'No results Message',
+  title: 'Messages/No results',
   component: NoResultsMessage,
 };
 

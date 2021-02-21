@@ -2,7 +2,7 @@ import React from 'react';
 import ErrorMessage from '../Components/ErrorMessage';
 
 export default {
-  title: 'Error Message',
+  title: 'Messages/Error',
   component: ErrorMessage,
 };
 

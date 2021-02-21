@@ -2,7 +2,7 @@ import React from 'react';
 import LoadingMessage from '../Components/LoadingMessage';
 
 export default {
-  title: 'Loading Message',
+  title: 'Messages/Loading',
   component: LoadingMessage,
 };
 

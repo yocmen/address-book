@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import UsersListItem from '../Components/UsersListItem';
+import UsersListItem from '../Components/UsersList/Item';
 import generateUsers from './Factories/Users';
 
 describe('User list item', () => {

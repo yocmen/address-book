@@ -10,7 +10,7 @@ const UsersList = () => {
 
   if (status.loading) return <LoadingMessage />;
 
-  if (status.complete && status.error) return <ErrorMessage />;
+  if (status.error) return <ErrorMessage />;
 
   if (status.complete && users.length === 0) return <NoResultsMessage />;
 

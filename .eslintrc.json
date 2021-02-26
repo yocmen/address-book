@@ -25,10 +25,9 @@
       "error",
       {
         "devDependencies": [
-          "**/*.test.ts",
-          "**/*.test.tsx",
-          "**/*.test.js",
-          "**/*.test.jsx"
+          "*/Tests/Factories/*.js",
+          "**/*.test.jsx",
+          "**/*.stories.jsx"
         ]
       }
     ],
@@ -36,6 +35,21 @@
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error"
+    "jest/valid-expect": "error",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "components": [
+          "Label"
+        ],
+        "required": {
+          "some": [
+            "nesting",
+            "id"
+          ]
+        },
+        "allowChildren": false
+      }
+    ]
   }
 }

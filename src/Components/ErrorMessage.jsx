@@ -9,7 +9,7 @@ const ErrorMessage = () => {
     >
       <FaExclamationTriangle className="text-red-700" />
       <span className="text-red-600">
-        Oops, error fetching the users, please try again later.
+        Oops, error fetching the contacts, please try again later.
       </span>
     </div>
   );

@@ -1,11 +1,11 @@
 import React from 'react';
 import Layout from '../Components/Layout';
-import UsersList from '../Components/UsersList/index';
+import ContactsList from '../Components/ContactsList/index';
 
 const HomePage = () => {
   return (
     <Layout>
-      <UsersList />
+      <ContactsList />
     </Layout>
   );
 };

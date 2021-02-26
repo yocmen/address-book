@@ -9,7 +9,7 @@ const NoResultsMessage = () => {
     >
       <FaExclamationCircle className="text-blue-700" />
       <span className="text-blue-600">
-        No users yet, please try again later.
+        No contacts yet, please try again later.
       </span>
     </div>
   );

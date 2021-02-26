@@ -1,5 +1,5 @@
-const usersRepository = {
-  fetchUsers: async () => {
+const contactsRepository = {
+  fetchContacts: async () => {
     try {
       const response = await fetch(
         `${process.env.REACT_APP_USERS_API}/?results=50&inc=picture,name,email,login,location,phone,cell`
@@ -17,4 +17,4 @@ const usersRepository = {
   },
 };
 
-export default usersRepository;
+export default contactsRepository;

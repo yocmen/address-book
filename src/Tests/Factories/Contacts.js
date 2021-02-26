@@ -27,7 +27,7 @@ const factory = Factory.define(() => ({
   },
 }));
 
-export default function generateUsers(min = 0, max = 10) {
+export default function generateContacts(min = 0, max = 10) {
   const length = Math.floor(Math.random() * (max - min) + min);
   return factory.buildList(length);
 }

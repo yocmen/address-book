@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import RoutesManager from './Routes/manager';
-import './assets/styles.css';
+import './Assets/styles.css';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,9 +1,9 @@
 import React from 'react';
 import fetchMock from 'fetch-mock';
-import generateUsers from '../../Tests/Factories/Users';
+import generateContacts from '../../Tests/Factories/Contacts';
 import HomePage from '../../Pages/Home';
 
-const users = generateUsers(3, 8);
+const contacts = generateContacts(3, 8);
 
 export default {
   title: 'Pages/Home',
@@ -13,7 +13,7 @@ export default {
 const Template = () => {
   fetchMock
     .restore()
-    .mock(`begin:${process.env.STORYBOOK_USERS_API}`, { results: users });
+    .mock(`begin:${process.env.STORYBOOK_USERS_API}`, { results: contacts });
   return <HomePage />;
 };
 

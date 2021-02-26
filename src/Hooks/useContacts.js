@@ -1,7 +1,11 @@
-import { useState, useEffect, useReducer } from 'react';
-import usersRepository from '../Services/usersRepository';
+import { useEffect, useReducer, useContext } from 'react';
+import contactsRepository from '../Services/contactsRepository';
+import { GlobalContext } from '../Context/Provider';
+import { ADD_CONTACTS } from '../Context/Constants/Contacts';
 
-const useUsers = () => {
+const useContacts = () => {
+  const { contactsDispatch } = useContext(GlobalContext);
+
   const dataFetchReducer = (_, action) => {
     switch (action.type) {
       case 'FETCH_INIT':
@@ -33,22 +37,20 @@ const useUsers = () => {
     error: false,
   });
 
-  const [users, setUsers] = useState([]);
-
   useEffect(() => {
     let didCancel = false;
 
-    const getUsers = async () => {
+    const fetchContacts = async () => {
       dispatch({ type: 'FETCH_INIT' });
       try {
-        const usersData = await usersRepository.fetchUsers();
+        const contactsData = await contactsRepository.fetchContacts();
 
-        if (usersData.error) {
-          throw new Error(usersData.error);
+        if (contactsData.error) {
+          throw new Error(contactsData.error);
         }
 
         if (!didCancel) {
-          setUsers(usersData);
+          contactsDispatch({ type: ADD_CONTACTS, payload: contactsData });
           dispatch({ type: 'FETCH_SUCCESS' });
         }
       } catch (error) {
@@ -57,14 +59,14 @@ const useUsers = () => {
       }
     };
 
-    getUsers();
+    fetchContacts();
 
     return () => {
       didCancel = true;
     };
   }, []);
 
-  return { status, users };
+  return { status };
 };
 
-export default useUsers;
+export default useContacts;

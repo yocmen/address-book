@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import { FaTimes, FaSearch } from 'react-icons/fa';
 import Button from './Button';
-import { SEARCH_CONTACTS } from '../Context/Constants/Contacts';
+import { GET_CONTACTS, SEARCH_CONTACTS } from '../Context/Constants/Contacts';
 import { GlobalContext } from '../Context/Provider';
 import { debounce } from '../helpers';
 
@@ -19,6 +19,7 @@ const SearchBar = () => {
 
   const clearSearchInput = () => {
     setQuery('');
+    contactsDispatch({ type: GET_CONTACTS });
     searchInput.current.focus();
   };
 
@@ -36,7 +37,7 @@ const SearchBar = () => {
 
   return (
     <div className="border border-gray-200 p-1 text-center rounded bg-gray-100 w-full">
-      <form action="" role="search">
+      <form action="" role="search" onSubmit={(e) => e.preventDefault()}>
         <div className="flex items-center">
           <label
             htmlFor="search"

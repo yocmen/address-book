@@ -15,7 +15,8 @@ const contacts = (state = initialState, { payload, type }) => {
   switch (type) {
     case GET_CONTACTS: {
       return {
-        state,
+        ...state,
+        isSearchActive: false,
       };
     }
     case ADD_CONTACTS: {

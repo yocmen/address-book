@@ -9,7 +9,7 @@ const SearchBar = () => {
   const { contactsDispatch } = useContext(GlobalContext);
   const debouncedContactsDispatch = debounce(contactsDispatch, 300);
 
-  const [disable, setDisable] = useState(true);
+  const [clearBtnStatus, setClearBtnStatus] = useState(true);
   const [query, setQuery] = useState('');
   const searchInput = useRef();
 
@@ -29,9 +29,9 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (query) {
-      setDisable(false);
+      setClearBtnStatus(false);
     } else {
-      setDisable(true);
+      setClearBtnStatus(true);
     }
   }, [query]);
 
@@ -62,8 +62,9 @@ const SearchBar = () => {
             </div>
           </div>
           <Button
+            aria-label="clear-search"
             onClick={clearSearchInput}
-            disabled={disable}
+            disabled={clearBtnStatus}
             className="w-10 h-10"
             title="Clear search field"
           >

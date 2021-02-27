@@ -15,11 +15,10 @@ const ContactsList = () => {
 
   if (status.error) return <ErrorMessage />;
 
-  if (
-    (status.complete && contacts.length === 0) ||
-    (isSearchActive && foundContacts.length === 0)
-  )
-    return <NoResultsMessage />;
+  if (status.complete && contacts.length === 0) return <NoResultsMessage />;
+
+  if (isSearchActive && foundContacts.length === 0)
+    return <NoResultsMessage customText="No contacts found." />;
 
   return (
     <div>

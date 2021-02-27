@@ -1,8 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { FaTimes, FaSearch } from 'react-icons/fa';
 import Button from './Button';
+import { SEARCH_CONTACTS } from '../Context/Constants/Contacts';
+import { GlobalContext } from '../Context/Provider';
 
 const SearchBar = () => {
+  const { contactsDispatch } = useContext(GlobalContext);
+
   const [disable, setDisable] = useState(true);
   const [query, setQuery] = useState('');
   const searchInput = useRef();
@@ -18,6 +22,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (query) {
+      contactsDispatch({ type: SEARCH_CONTACTS, payload: query });
       setDisable(false);
     } else {
       setDisable(true);

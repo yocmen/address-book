@@ -1,8 +1,13 @@
-import { GET_CONTACTS, ADD_CONTACTS } from '../Constants/Contacts';
+import {
+  GET_CONTACTS,
+  ADD_CONTACTS,
+  SEARCH_CONTACTS,
+} from '../Constants/Contacts';
+import { filterContacts } from '../../helpers';
 
 export const initialState = {
   contacts: [],
-  isSearchActive: '',
+  isSearchActive: false,
   foundContacts: [],
 };
 
@@ -17,6 +22,14 @@ const contacts = (state = initialState, { payload, type }) => {
       return {
         ...state,
         contacts: payload,
+      };
+    }
+    case SEARCH_CONTACTS: {
+      console.log('searching...');
+      return {
+        ...state,
+        isSearchActive: payload.length > 0,
+        foundContacts: filterContacts(state.contacts, payload),
       };
     }
     default:

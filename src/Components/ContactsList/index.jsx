@@ -9,17 +9,21 @@ import { GlobalContext } from '../../Context/Provider';
 const ContactsList = () => {
   const { status } = useContacts();
   const { contactsState } = useContext(GlobalContext);
-  const { contacts } = contactsState;
+  const { contacts, isSearchActive, foundContacts } = contactsState;
 
   if (status.loading) return <LoadingMessage />;
 
   if (status.error) return <ErrorMessage />;
 
-  if (status.complete && contacts.length === 0) return <NoResultsMessage />;
-
+  if (
+    (status.complete && contacts.length === 0) ||
+    (isSearchActive && foundContacts.length === 0)
+  )
+    return <NoResultsMessage />;
+  console.log(foundContacts);
   return (
     <div>
-      <List contacts={contacts} />
+      <List contacts={isSearchActive ? foundContacts : contacts} />
     </div>
   );
 };

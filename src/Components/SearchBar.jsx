@@ -31,7 +31,7 @@ const SearchBar = () => {
           <label
             htmlFor="search"
             aria-label="Search"
-            className="hidden md:block md:mr-2"
+            className="hidden text-sm text-gray-600 md:block md:mr-2"
           >
             Search contact
           </label>
@@ -39,10 +39,11 @@ const SearchBar = () => {
             <input
               type="text"
               id="search"
-              className="w-full border border-gray-300 rounded bg-white px-3 py-2 rounded focus:border-gray-400 focus:outline-none"
+              className="w-full border border-gray-300 rounded bg-white px-3 py-2 rounded focus:border-gray-400 focus:outline-none placeholder-gray-300"
               ref={searchInput}
               value={query}
               onChange={handleChange}
+              placeholder="e.g. Jhon Doe"
             />
             <div className="absolute right-3 top-3 text-gray-300 md:hidden">
               <FaSearch />

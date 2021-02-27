@@ -25,7 +25,6 @@ const contacts = (state = initialState, { payload, type }) => {
       };
     }
     case SEARCH_CONTACTS: {
-      console.log('searching...');
       return {
         ...state,
         isSearchActive: payload.length > 0,

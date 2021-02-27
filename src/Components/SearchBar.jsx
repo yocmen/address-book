@@ -3,9 +3,11 @@ import { FaTimes, FaSearch } from 'react-icons/fa';
 import Button from './Button';
 import { SEARCH_CONTACTS } from '../Context/Constants/Contacts';
 import { GlobalContext } from '../Context/Provider';
+import { debounce } from '../helpers';
 
 const SearchBar = () => {
   const { contactsDispatch } = useContext(GlobalContext);
+  const debouncedContactsDispatch = debounce(contactsDispatch, 300);
 
   const [disable, setDisable] = useState(true);
   const [query, setQuery] = useState('');
@@ -20,9 +22,12 @@ const SearchBar = () => {
     searchInput.current.focus();
   };
 
+  const searchContact = () => {
+    debouncedContactsDispatch({ type: SEARCH_CONTACTS, payload: query });
+  };
+
   useEffect(() => {
     if (query) {
-      contactsDispatch({ type: SEARCH_CONTACTS, payload: query });
       setDisable(false);
     } else {
       setDisable(true);
@@ -49,6 +54,7 @@ const SearchBar = () => {
               value={query}
               onChange={handleChange}
               placeholder="e.g. Jhon Doe"
+              onKeyUp={searchContact}
             />
             <div className="absolute right-3 top-3 text-gray-300 md:hidden">
               <FaSearch />

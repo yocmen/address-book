@@ -20,7 +20,7 @@ const ContactsList = () => {
     (isSearchActive && foundContacts.length === 0)
   )
     return <NoResultsMessage />;
-  console.log(foundContacts);
+
   return (
     <div>
       <List contacts={isSearchActive ? foundContacts : contacts} />

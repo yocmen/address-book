@@ -21,6 +21,12 @@
     "jest"
   ],
   "rules": {
+    "react/jsx-props-no-spreading": [
+      1,
+      {
+        "html": "ignore"
+      }
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {

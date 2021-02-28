@@ -28,7 +28,7 @@ const contacts = (state = initialState, { payload, type }) => {
     case ADD_CONTACTS: {
       return {
         ...state,
-        contacts: payload,
+        contacts: [...state.contacts, ...payload],
       };
     }
     case SEARCH_CONTACTS: {
@@ -43,6 +43,7 @@ const contacts = (state = initialState, { payload, type }) => {
 
       return {
         ...state,
+        contacts: [],
         countryFilter: payload,
       };
     }

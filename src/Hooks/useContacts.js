@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useContext } from 'react';
+import { useEffect, useReducer, useContext, useState } from 'react';
 import contactsRepository from '../Services/contactsRepository';
 import { GlobalContext } from '../Context/Provider';
 import { ADD_CONTACTS } from '../Context/Constants/Contacts';
@@ -7,22 +7,30 @@ import { getFilteredCountries } from '../helpers';
 const useContacts = () => {
   const { contactsState, contactsDispatch } = useContext(GlobalContext);
   const { countryFilter } = contactsState;
+  const [refetchIndex, setRefetchIndex] = useState(0);
+
+  const TYPE = {
+    FETCH_INIT: 'FETCH_INIT',
+    FETCH_SUCCESS: 'FETCH_SUCCESS',
+    FETCH_FAILURE: 'FETCH_FAILURE',
+    FETCH_MORE: 'FETCH_MORE',
+  };
 
   const dataFetchReducer = (_, action) => {
     switch (action.type) {
-      case 'FETCH_INIT':
+      case TYPE.FETCH_INIT:
         return {
           loading: true,
           complete: false,
           error: false,
         };
-      case 'FETCH_SUCCESS':
+      case TYPE.FETCH_SUCCESS:
         return {
           loading: false,
           complete: true,
           error: false,
         };
-      case 'FETCH_FAILURE':
+      case TYPE.FETCH_FAILURE:
         return {
           loading: false,
           complete: false,
@@ -39,19 +47,26 @@ const useContacts = () => {
     error: false,
   });
 
+  const fetchFromRepository = async () => {
+    const filteredCountries = getFilteredCountries(countryFilter)
+      .replace(/\s/g, '')
+      .toLowerCase();
+
+    return contactsRepository.fetchContacts(filteredCountries);
+  };
+
+  const refetch = () =>
+    setRefetchIndex((prevRefetchIndex) => prevRefetchIndex + 1);
+
   useEffect(() => {
+    if (status.loading) return false;
+
     let didCancel = false;
 
     const fetchContacts = async () => {
-      dispatch({ type: 'FETCH_INIT' });
+      dispatch({ type: TYPE.FETCH_INIT });
       try {
-        const filteredCountries = getFilteredCountries(countryFilter)
-          .replace(/\s/g, '')
-          .toLowerCase();
-
-        const contactsData = await contactsRepository.fetchContacts(
-          filteredCountries
-        );
+        const contactsData = await fetchFromRepository();
 
         if (contactsData.error) {
           throw new Error(contactsData.error);
@@ -59,11 +74,11 @@ const useContacts = () => {
 
         if (!didCancel) {
           contactsDispatch({ type: ADD_CONTACTS, payload: contactsData });
-          dispatch({ type: 'FETCH_SUCCESS' });
+          dispatch({ type: TYPE.FETCH_SUCCESS });
         }
       } catch (error) {
         // send error to monitoring tool like bugsnag
-        dispatch({ type: 'FETCH_FAILURE' });
+        dispatch({ type: TYPE.FETCH_FAILURE });
       }
     };
 
@@ -72,9 +87,9 @@ const useContacts = () => {
     return () => {
       didCancel = true;
     };
-  }, []);
+  }, [refetchIndex]);
 
-  return { status };
+  return { status, refetch };
 };
 
 export default useContacts;

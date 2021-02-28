@@ -2,3 +2,4 @@ export const ADD_CONTACTS = 'ADD_CONTACTS';
 export const GET_CONTACTS = 'GET_CONTACTS';
 export const SEARCH_CONTACTS = 'SEARCH_CONTACTS';
 export const GET_CONTACT = 'GET_CONTACT';
+export const SET_COUNTRY_FILTER = 'SET_COUNTRY_FILTER';

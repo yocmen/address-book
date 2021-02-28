@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   render,
+  renderWithRouter,
   screen,
   fireEvent,
   waitForElementToBeRemoved,
@@ -14,7 +15,7 @@ jest.mock('../Services/contactsRepository');
 
 describe('search bar component', () => {
   it('shows the search form on Home page', () => {
-    render(<HomePage />);
+    renderWithRouter(<HomePage />);
 
     expect(screen.getByRole('search')).toBeInTheDocument();
   });
@@ -39,7 +40,7 @@ describe('search bar component', () => {
     const contacts = generateContacts(2, 2);
     contactsRepository.fetchContacts.mockResolvedValueOnce(contacts);
 
-    render(<HomePage />);
+    renderWithRouter(<HomePage />);
 
     await screen.findByText(contacts[0].name.first);
 
@@ -65,7 +66,7 @@ describe('search bar component', () => {
     const contacts = generateContacts(1, 3);
     contactsRepository.fetchContacts.mockResolvedValueOnce(contacts);
 
-    render(<HomePage />);
+    renderWithRouter(<HomePage />);
 
     await screen.findByText(contacts[0].name.first);
 

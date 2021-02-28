@@ -2,9 +2,11 @@ import { useEffect, useReducer, useContext } from 'react';
 import contactsRepository from '../Services/contactsRepository';
 import { GlobalContext } from '../Context/Provider';
 import { ADD_CONTACTS } from '../Context/Constants/Contacts';
+import { getFilteredCountries } from '../helpers';
 
 const useContacts = () => {
-  const { contactsDispatch } = useContext(GlobalContext);
+  const { contactsState, contactsDispatch } = useContext(GlobalContext);
+  const { countryFilter } = contactsState;
 
   const dataFetchReducer = (_, action) => {
     switch (action.type) {
@@ -43,7 +45,13 @@ const useContacts = () => {
     const fetchContacts = async () => {
       dispatch({ type: 'FETCH_INIT' });
       try {
-        const contactsData = await contactsRepository.fetchContacts();
+        const filteredCountries = getFilteredCountries(countryFilter)
+          .replace(/\s/g, '')
+          .toLowerCase();
+
+        const contactsData = await contactsRepository.fetchContacts(
+          filteredCountries
+        );
 
         if (contactsData.error) {
           throw new Error(contactsData.error);

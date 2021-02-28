@@ -5,11 +5,17 @@ import ErrorMessage from '../ErrorMessage';
 import NoResultsMessage from '../NoResultsMessage';
 import List from './List';
 import { GlobalContext } from '../../Context/Provider';
+import { getFilteredCountries } from '../../helpers';
 
 const ContactsList = () => {
   const { status } = useContacts();
   const { contactsState } = useContext(GlobalContext);
-  const { contacts, isSearchActive, foundContacts } = contactsState;
+  const {
+    contacts,
+    isSearchActive,
+    foundContacts,
+    countryFilter,
+  } = contactsState;
 
   if (status.loading) return <LoadingMessage />;
 
@@ -20,8 +26,15 @@ const ContactsList = () => {
   if (isSearchActive && foundContacts.length === 0)
     return <NoResultsMessage customText="No contacts found." />;
 
+  const filteredCountries = getFilteredCountries(countryFilter);
+
   return (
     <div>
+      {filteredCountries && (
+        <div className="font-semibold mb-1">
+          Contacts filtered by country: [ {filteredCountries} ]
+        </div>
+      )}
       <List contacts={isSearchActive ? foundContacts : contacts} />
     </div>
   );

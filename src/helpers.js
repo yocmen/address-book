@@ -28,3 +28,17 @@ export const filterContacts = (contacts, searchValue) => {
 
   return [];
 };
+
+export const getFilteredCountries = (CountriesObject) => {
+  const countriesToFilter = Object.keys(CountriesObject);
+
+  if (countriesToFilter.length > 0) {
+    const countriesList = countriesToFilter.filter((country) => {
+      return CountriesObject[country];
+    });
+
+    return countriesList.join(', ');
+  }
+
+  return '';
+};

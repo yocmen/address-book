@@ -11,6 +11,16 @@ import generateContacts from './Factories/Contacts';
 
 jest.mock('../Services/contactsRepository');
 
+const observe = jest.fn();
+const unobserve = jest.fn();
+
+beforeEach(() => {
+  window.IntersectionObserver = jest.fn(() => ({
+    observe,
+    unobserve,
+  }));
+});
+
 describe('contact component', () => {
   it('shows a loading message before fetch', async () => {
     contactsRepository.fetchContacts.mockResolvedValueOnce([]);
@@ -57,12 +67,24 @@ describe('contact component', () => {
     contactsRepository.fetchContacts.mockResolvedValueOnce(contacts);
     render(<ContactList />);
 
-    await waitForElementToBeRemoved(() =>
-      screen.getByText(/loading contacts/i)
-    );
+    await waitFor(() => {
+      screen.getByText(contacts[0].name.first);
+    });
 
     contacts.forEach((user) => {
       expect(screen.getByText(user.name.first)).toBeInTheDocument();
     });
+  });
+
+  it('should start observing on render the list', async () => {
+    const contacts = generateContacts(1, 3);
+    contactsRepository.fetchContacts.mockResolvedValueOnce(contacts);
+    render(<ContactList />);
+
+    await waitFor(() => {
+      screen.getByText(contacts[0].name.first);
+    });
+
+    expect(observe).toHaveBeenCalled();
   });
 });

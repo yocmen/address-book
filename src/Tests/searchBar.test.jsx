@@ -13,6 +13,16 @@ import contactsRepository from '../Services/contactsRepository';
 
 jest.mock('../Services/contactsRepository');
 
+beforeEach(() => {
+  const observe = jest.fn();
+  const unobserve = jest.fn();
+
+  window.IntersectionObserver = jest.fn(() => ({
+    observe,
+    unobserve,
+  }));
+});
+
 describe('search bar component', () => {
   it('shows the search form on Home page', () => {
     renderWithRouter(<HomePage />);

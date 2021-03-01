@@ -1,30 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FaSearch } from 'react-icons/fa';
 import Button from '../Button';
-import Modal from '../Modal';
-import ContactCard from '../ContactCard';
 
-const Item = ({ contact }) => {
-  const [modalIsOpen, setModalVisibility] = useState(false);
-
+const Item = ({ contact, modalStatusHandler, contactForModalHandler }) => {
   const seeDetailsHandler = (e) => {
     e.preventDefault();
-    setModalVisibility(true);
+
+    contactForModalHandler(contact);
+    modalStatusHandler(true);
   };
 
   return (
     <div className="border border-gray-200 shadow-sm rounded px-4 py-2 flex items-center space-x-2 w-full">
-      <Modal
-        modalIsOpen={modalIsOpen}
-        closeModal={() => setModalVisibility(false)}
-      >
-        <ContactCard contact={contact} />
-      </Modal>
       <img
         aria-label={`${contact.login.username}_avatar`}
         alt={`${contact.login.username}_avatar`}
-        loading="lazy"
         src={contact.picture.thumbnail}
         className="rounded border border-gray-200 shadow-sm w-14 h-14 bg-gray-100 overflow-hidden"
       />
@@ -54,6 +45,8 @@ const Item = ({ contact }) => {
 };
 
 Item.propTypes = {
+  modalStatusHandler: PropTypes.func.isRequired,
+  contactForModalHandler: PropTypes.func.isRequired,
   contact: PropTypes.shape({
     login: PropTypes.shape({
       username: PropTypes.string.isRequired,

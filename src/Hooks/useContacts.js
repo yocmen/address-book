@@ -59,7 +59,8 @@ const useContacts = () => {
     setRefetchIndex((prevRefetchIndex) => prevRefetchIndex + 1);
 
   useEffect(() => {
-    if (status.loading) return false;
+    console.log(status);
+    // if (status.loading) return false;
 
     let didCancel = false;
 

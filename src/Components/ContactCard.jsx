@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaPhoneSquare } from 'react-icons/fa';
 
-const ContactCard = ({ contact }) => {
+const ContactCard = React.memo(({ contact }) => {
   return (
     <div style={{ width: 300 }} className="flex space-x-3 items-center">
       <div>
@@ -35,30 +35,33 @@ const ContactCard = ({ contact }) => {
       </div>
     </div>
   );
+});
+
+ContactCard.defaultProps = {
+  contact: {},
 };
 
 ContactCard.propTypes = {
   contact: PropTypes.shape({
     location: PropTypes.shape({
       street: PropTypes.shape({
-        number: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-      }).isRequired,
-      city: PropTypes.string.isRequired,
-      state: PropTypes.string.isRequired,
-      postcode: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired,
+        number: PropTypes.number,
+        name: PropTypes.string,
+      }),
+      city: PropTypes.string,
+      state: PropTypes.string,
+      postcode: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
     name: PropTypes.shape({
-      first: PropTypes.string.isRequired,
-      last: PropTypes.string.isRequired,
+      first: PropTypes.string,
+      last: PropTypes.string,
     }),
     picture: PropTypes.shape({
-      large: PropTypes.string.isRequired,
+      large: PropTypes.string,
     }),
-    phone: PropTypes.string.isRequired,
-    cell: PropTypes.string.isRequired,
-  }).isRequired,
+    phone: PropTypes.string,
+    cell: PropTypes.string,
+  }),
 };
 
 export default ContactCard;

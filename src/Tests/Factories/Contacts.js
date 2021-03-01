@@ -4,6 +4,7 @@ import { name, image, internet, random, address, phone } from 'faker';
 const factory = Factory.define(() => ({
   picture: {
     thumbnail: image.avatar(),
+    large: image.avatar(),
     // thumbnail: 'https://randomuser.me/api/portraits/thumb/men/41.jpg',
   },
   name: {

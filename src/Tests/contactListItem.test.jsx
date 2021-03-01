@@ -6,7 +6,13 @@ import generateContacts from './Factories/Contacts';
 describe('contact list item', () => {
   it('shows the avatar', () => {
     const contacts = generateContacts(1, 1);
-    render(<ContactsListItem contact={contacts[0]} />);
+    render(
+      <ContactsListItem
+        contact={contacts[0]}
+        modalStatusHandler={jest.fn()}
+        contactForModalHandler={jest.fn()}
+      />
+    );
 
     expect(
       screen.getByRole('img', { name: `${contacts[0].login.username}_avatar` })
@@ -16,7 +22,13 @@ describe('contact list item', () => {
   it('shows the first name', () => {
     const [contact] = generateContacts(1, 1);
 
-    render(<ContactsListItem contact={contact} />);
+    render(
+      <ContactsListItem
+        contact={contact}
+        modalStatusHandler={jest.fn()}
+        contactForModalHandler={jest.fn()}
+      />
+    );
 
     expect(screen.getByText(contact.name.first)).toBeInTheDocument();
   });
@@ -24,7 +36,13 @@ describe('contact list item', () => {
   it('shows the last name', () => {
     const [contact] = generateContacts(1, 1);
 
-    render(<ContactsListItem contact={contact} />);
+    render(
+      <ContactsListItem
+        contact={contact}
+        modalStatusHandler={jest.fn()}
+        contactForModalHandler={jest.fn()}
+      />
+    );
 
     expect(screen.getByText(contact.name.last)).toBeInTheDocument();
   });
@@ -32,7 +50,13 @@ describe('contact list item', () => {
   it('shows the username', () => {
     const [contact] = generateContacts(1, 1);
 
-    render(<ContactsListItem contact={contact} />);
+    render(
+      <ContactsListItem
+        contact={contact}
+        modalStatusHandler={jest.fn()}
+        contactForModalHandler={jest.fn()}
+      />
+    );
 
     expect(screen.getByText(contact.login.username)).toBeInTheDocument();
   });
@@ -40,7 +64,13 @@ describe('contact list item', () => {
   it('shows the email', () => {
     const [contact] = generateContacts(1, 1);
 
-    render(<ContactsListItem contact={contact} />);
+    render(
+      <ContactsListItem
+        contact={contact}
+        modalStatusHandler={jest.fn()}
+        contactForModalHandler={jest.fn()}
+      />
+    );
 
     expect(screen.getByText(contact.email)).toBeInTheDocument();
   });

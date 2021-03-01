@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from './test-utils';
+import { render, screen, fireEvent } from './test-utils';
 import ContactsListItem from '../Components/ContactsList/Item';
 import generateContacts from './Factories/Contacts';
 
@@ -43,5 +43,15 @@ describe('contact list item', () => {
     render(<ContactsListItem contact={contact} />);
 
     expect(screen.getByText(contact.email)).toBeInTheDocument();
+  });
+
+  it('shows the modal when click the see details button', () => {
+    const [contact] = generateContacts(1, 1);
+
+    render(<ContactsListItem contact={contact} />);
+
+    fireEvent.click(screen.getByText(/see details/i));
+
+    expect(screen.getByRole('dialog', { hidden: true })).toBeInTheDocument();
   });
 });

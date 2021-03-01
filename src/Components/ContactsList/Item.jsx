@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { FaSearch } from 'react-icons/fa';
+import Button from '../Button';
+import Modal from '../Modal';
+import ContactCard from '../ContactCard';
 
 const Item = ({ contact }) => {
+  const [modalIsOpen, setModalVisibility] = useState(false);
+
+  const seeDetailsHandler = (e) => {
+    e.preventDefault();
+    setModalVisibility(true);
+  };
+
   return (
     <div className="border border-gray-200 shadow-sm rounded px-4 py-2 flex items-center space-x-2 w-full">
+      <Modal
+        modalIsOpen={modalIsOpen}
+        closeModal={() => setModalVisibility(false)}
+      >
+        <ContactCard contact={contact} />
+      </Modal>
       <img
         aria-label={`${contact.login.username}_avatar`}
         alt={`${contact.login.username}_avatar`}
@@ -20,6 +37,17 @@ const Item = ({ contact }) => {
           <span>{contact.login.username}</span>
           <span>{contact.email}</span>
         </div>
+      </div>
+      <div className="flex-grow text-right">
+        <Button
+          onClick={seeDetailsHandler}
+          className="px-3 py-1 inline-flex h-10"
+        >
+          <span className="hidden md:block">See Details</span>
+          <span className="md:hidden">
+            <FaSearch />
+          </span>
+        </Button>
       </div>
     </div>
   );

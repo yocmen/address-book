@@ -22,9 +22,9 @@ const factory = Factory.define(() => ({
     city: address.city(),
     state: address.state(),
     postcode: address.zipCode(),
-    phone: phone.phoneNumber(),
-    cell: phone.phoneNumber(),
   },
+  phone: phone.phoneNumber(),
+  cell: phone.phoneNumber(),
 }));
 
 export default function generateContacts(min = 0, max = 10) {

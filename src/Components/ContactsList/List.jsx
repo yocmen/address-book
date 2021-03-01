@@ -7,7 +7,10 @@ const List = ({ contacts }) => {
     <div className="space-y-2 w-full">
       {contacts.map((contact) => {
         return (
-          <Item contact={contact} key={`contact_${contact.login.username}`} />
+          <Item
+            contact={contact}
+            key={`contact_${contact.login.username}_${Math.random()}`}
+          />
         );
       })}
     </div>

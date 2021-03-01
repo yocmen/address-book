@@ -47,11 +47,18 @@ describe('contact list item', () => {
 
   it('shows the modal when click the see details button', () => {
     const [contact] = generateContacts(1, 1);
+    const modalStatusHandler = jest.fn();
 
-    render(<ContactsListItem contact={contact} />);
+    render(
+      <ContactsListItem
+        contact={contact}
+        modalStatusHandler={modalStatusHandler}
+        contactForModalHandler={jest.fn()}
+      />
+    );
 
     fireEvent.click(screen.getByText(/see details/i));
 
-    expect(screen.getByRole('dialog', { hidden: true })).toBeInTheDocument();
+    expect(modalStatusHandler).toBeCalledTimes(1);
   });
 });

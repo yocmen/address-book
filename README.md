@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Addres book app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple react app mocking an address-book
 
-## Available Scripts
+LIVE DEMO -> [Demo page hosting on Netlify](https://frosty-benz-d50b1c.netlify.app/)
 
-In the project directory, you can run:
+## Installation
 
-### `yarn start`
+First, you need to clone the repo, for example:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+git clone https://github.com/yocmen/address-book
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+them go to the folder
+```bash
+cd address-book
+```
 
-### `yarn test`
+Create a .env and provide a valid string API:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To create a .env file just run:
+```bash
+touch .env
+```
 
-### `yarn build`
+Example values:
+```env
+REACT_APP_USERS_API="https://randomuser.me/api"
+STORYBOOK_USERS_API="https://randomuser.me/api"
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## For Develop -> front-end
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To work in the **front-end** you need to install the package dependencies.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Using Yarn just execute:
 
-### `yarn eject`
+```bash
+yarn install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+to start the dev server just run:
+```bash
+yarn start
+```
+This will start the dev server on **http://localhost:3000**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you need change the app port just add in the .env file
+```env
+PORT=NEW_PORT_NUMBER
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+StoryBook is used for some components, you can run:
+```env
+yarn storybook
+```
+To start a new server on port **6006** and check the visuals.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Note: the faker library has some problems with the image URLs, that's why you can't see them in the components.**
 
-## Learn More
+## PRODUCTION Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Install all the dependencies in front-end (see **For develop** above).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The next step is create a build of the React  client, just run:
 
-### Code Splitting
+```bash
+yarn build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+When the process finished you can test the app running:
 
-### Analyzing the Bundle Size
+For install a webserver
+```bash
+yarn global add serve
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+To run the app in the webserver
+```bash
+serve -s build
+```
 
-### Making a Progressive Web App
+This will start the **PRODUCTION** server on **http://localhost:5000** and from there you can see the app working.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### Advanced Configuration
+Please make sure to update tests as appropriate.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
